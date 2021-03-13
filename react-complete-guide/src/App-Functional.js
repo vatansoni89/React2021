@@ -20,7 +20,7 @@ const app = (props) => {
   });
 
   const switchNameHandler = () => {
-    //console.log('Name Swiched');
+    console.log('Name Swiched');
     setPersonsState({
       persons: [
         { name: "Max", age: 30 },
