@@ -146,9 +146,9 @@ OP:
 [3,4,5]
 ```
 
-Rest parameter: collects all remaining elements into an array.
+`Rest parameter`: collects all remaining elements into an array.
 
-Spread operator: allows iterables( arrays / objects / strings ) to be expanded into single arguments/elements.
+`Spread operator`: allows iterables( arrays / objects / strings ) to be expanded into single arguments/elements.
 
 ```javascript
 ///Spread operator///
