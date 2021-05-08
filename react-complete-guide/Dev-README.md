@@ -184,7 +184,7 @@ const fullname = {
 };
 
 console.log(fullname);
-
+//OP:
 //[object Object] {
 
 //name: "vatan",
