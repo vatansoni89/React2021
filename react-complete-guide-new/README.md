@@ -1,70 +1,290 @@
-# Getting Started with Create React App
+# Understanding "let" and "const"
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```javascript
+//var don't care if we create multiple at same time.
 
-## Available Scripts
+//Scope to function.
 
-In the project directory, you can run:
+var myName = "maxx";
 
-### `npm start`
+var myName = "hjh";
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+console.log(myName);
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+//let don't allow to create multiple but we can change value
 
-### `npm test`
+//Scoped to curly braces.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+let myName = "maxx";
 
-### `npm run build`
+let myName = "hjh";
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+console.log(myName);
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+//const don't even allow to change value.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+const myName = "maxx";
 
-### `npm run eject`
+myName = "hjh";
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Arrow Functions
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
+////////Normal function////////
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+function getMyName(name) {
+  console.log(name);
+}
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+getMyName("vatan");
 
-## Learn More
+////////Arrow function////////
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+let getMyname = (name) => {
+  console.log(name);
+};
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+getMyname("soni");
 
-### Code Splitting
+////Compact Arrow function////
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+let getSonuName = (name) => console.log(name);
 
-### Analyzing the Bundle Size
+getSonuName("sonali");
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+///With no arguments/////
 
-### Making a Progressive Web App
+let noArgsGiven = () => console.log("No agrs provided.");
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+noArgsGiven();
+```
 
-### Advanced Configuration
+# Understanding Classes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```javascript
+//Don't give access specifier like Public for class
 
-### Deployment
+//Don't Vatan v = new Vatan();
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+//ES 6
 
-### `npm run build` fails to minify
+class Man {
+  constructor() {
+    this.gender = "male";
+  }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  printGender() {
+    console.log(this.gender);
+  }
+}
+
+class Vatan extends Man {
+  constructor() {
+    super();
+
+    this.name = "Vatan";
+  }
+
+  printMyName() {
+    console.log(this.name);
+  }
+}
+
+const v = new Vatan();
+
+v.printMyName();
+
+v.printGender();
+```
+
+# Classes, Properties and Methods
+
+```javascript
+//Don't give access specifier
+
+//Don't Vatan v = new Vatan();
+
+//ES7
+
+class Man {
+  gender = "male";
+
+  printGender = () => console.log(this.gender);
+}
+
+class Vatan extends Man {
+  name = "Vatan";
+
+  printMyName = () => console.log(this.name);
+}
+
+const v = new Vatan();
+
+v.printMyName();
+
+v.printGender();
+```
+
+# The Spread & Rest Operator
+
+```javascript
+Rest Operator
+
+/////Rest operator////
+
+const fun1 = (...arg) => arg.sort();
+
+console.log(fun1);
+
+
+
+fun1(5,4,3)
+
+OP:
+
+[3,4,5]
+```
+
+`Rest parameter`: collects all remaining elements into an array.
+
+`Spread operator`: allows iterables( arrays / objects / strings ) to be expanded into single arguments/elements.
+
+```javascript
+///Spread operator///
+
+const numbers = [1, 2, 3];
+
+const extendNumbers = [...numbers, 4];
+
+const typelessArray = [numbers, 5];
+
+const getSortedNumbers = (...arg) => arg.sort();
+
+const filter = (...arg) => arg.filter((el) => el === 1);
+
+console.log(extendNumbers); //[1, 2, 3, 4]
+
+console.log(typelessArray); //[[1, 2, 3], 5]
+
+console.log(getSortedNumbers(4, 2, 5)); //[2, 4, 5]
+
+console.log(filter(4, 2, 5, 1)); //[1]
+
+///spread json example.
+
+const name = {
+  name: "vatan",
+};
+
+const fullname = {
+  ...name,
+
+  surname: "soni",
+};
+
+console.log(fullname);
+//OP:
+//[object Object] {
+
+//name: "vatan",
+
+//surname: "soni"
+
+//}
+```
+
+# Destructuring
+
+```javascript
+//array de-structuring
+
+const numbers = [1, 2, 3];
+
+[n1, n2] = numbers;
+
+console.log(n1, n2);
+
+[p1, , p3] = [1, 2, 3];
+
+console.log(p1, p3);
+```
+
+# Reference and Primitive Types Refresher
+
+```javascript
+//<<<<<<<<<Reference and Primitive types refresher>>>>>>>>
+
+//<<<<Primitive types means value types>>>>
+
+const num1 = 5; //primitive type
+
+const num2 = num1; //copy value
+
+console.log(num2);
+
+//<<<<<<<<Reference types>>>>>>>>>>>
+
+const person = {
+  name: "Vatan",
+};
+
+const secondPerson = person;
+
+person.name = "Name changed";
+
+console.log(secondPerson);
+```
+
+# Refreshing Array Functions
+
+```javascript
+///<<<<<Refresh array functions>>>>>>>
+
+//<<<Map()>>>
+
+const numbers = [1, 2, 3];
+
+const doubleNumArray = numbers.map((num) => num * 2);
+
+console.log(doubleNumArray);
+```
+
+# Creating A New React Project
+
+```node
+npx create-react-app react-complete-guide-new
+cd react-complete-guide-new
+npm install
+npm start
+```
+# How React works #
+* public\index.html has index.html which have a div with id as root.
+* src\index.js render the App component on this root div.
+* All other component will be child to this App component.
+
+# Function component #
+
+* Create a component file under component folder.
+* Import necessary library.
+* Declare function variable by let and return jsx.
+* Export default variable.
+```javascript
+import './ExpenseItem.css'
+
+let expenseItem = () => {
+  return (
+    <div className='expense-item'>
+      <div>March 28th 2021</div>
+      <div className='expense-item__description'>
+          <h2>Car Insurance</h2>
+          <div className='expense-item__price'>$294.67</div>
+      </div>
+    </div>
+  );
+};
+
+export default expenseItem;
+
+```
+
