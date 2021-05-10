@@ -288,3 +288,45 @@ export default expenseItem;
 
 ```
 
+# Composition by children props #
+* It is used when we have common stuff like style etc to apply on contained item.
+* Create Card.js and Card.css, here Card.js is a container returns div with common styles and given style(prop style).
+* Now <Card></Card> can be used as wrapper.
+
+### `Card.css`
+```css
+.card{
+    border-radius: 12px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+```
+
+### `Card.js`
+```javascript
+import "./Card.css";
+
+const card = (props) => {
+  let classes = 'card ' + props.className;
+  return <div className={classes}>{props.children}</div>;
+};
+
+export default card;
+```
+### `Expense.js`
+```javascript
+import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
+import Card from "./Card";
+
+let expenses = (props) => {
+  return (
+    <Card className="expenses">
+      {props.expensesList.map((x) => (
+        <ExpenseItem item={x} />
+      ))}
+    </Card>
+  );
+};
+
+export default expenses;
+```

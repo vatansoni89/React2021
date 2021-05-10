@@ -1,5 +1,5 @@
 import Expenses from "./components/Expenses";
-import './Expenses.css';
+
 
 function App() {
   const expenses = [
@@ -25,7 +25,7 @@ function App() {
   ];
 
   return (
-    <div className='expenses'>
+    <div>
       <h2>Lets get started</h2>
       <Expenses expensesList = {expenses}></Expenses>
     </div>

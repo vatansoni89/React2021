@@ -1,8 +1,15 @@
-import ExpenseItem from './ExpenseItem';
+import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
+import Card from "./Card";
 
 let expenses = (props) => {
-
-  return props.expensesList.map((x) => <ExpenseItem item={x} />);
+  return (
+    <Card className="expenses">
+      {props.expensesList.map((x) => (
+        <ExpenseItem item={x} />
+      ))}
+    </Card>
+  );
 };
 
 export default expenses;
