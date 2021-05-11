@@ -1,5 +1,5 @@
 import Expenses from "./components/Expenses/Expenses";
-
+import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
   const expenses = [
@@ -24,10 +24,15 @@ function App() {
     },
   ];
 
+  const newExpenseSubmitHandler = (newExpense) => {
+    console.log("newExpenseSubmitHandler >>", newExpense);
+  };
+
   return (
     <div>
       <h2>Lets get started</h2>
-      <Expenses expensesList = {expenses}></Expenses>
+      <NewExpense onSubmit={newExpenseSubmitHandler} />
+      <Expenses expensesList={expenses}></Expenses>
     </div>
   );
 }
