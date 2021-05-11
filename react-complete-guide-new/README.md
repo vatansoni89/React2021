@@ -330,3 +330,11 @@ let expenses = (props) => {
 
 export default expenses;
 ```
+# Working with State #
+* Import useState from react.
+* use useState(value) to initialize state variable.
+* Destructure the return as it returns old value and a function to change old value.
+```javascript
+const[title, setTitle] = useState(props.item.title);
+``` 
+* Now use title to access get value and setTitle function to set value.
