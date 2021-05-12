@@ -338,3 +338,14 @@ export default expenses;
 const[title, setTitle] = useState(props.item.title);
 ``` 
 * Now use title to access get value and setTitle function to set value.
+
+# Events & State #
+```yaml
+App
+  NewExpense
+    ExpenseForm
+  Expenses: Pass a props function to set the state and default val of dropdwn.
+    ExpenseFilter: It has a local function which uses props function to set state.
+    ExpenseItem
+```
+  
