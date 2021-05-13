@@ -12,9 +12,9 @@ let Expenses = (props) => {
     setFilterOptions(exp);
   };
 
-  const filterExpenseByYear = props.expensesList.filter(
-    (x) => x.date.getFullYear() == filteredYearOption
-  );
+  // const filterExpenseByYear = props.expensesList.filter(
+  //   (x) => x.date.getFullYear() == filteredYearOption
+  // );
 
   return (
     <div>
@@ -27,7 +27,6 @@ let Expenses = (props) => {
         <ExpenseList
           filteredYearOption={filteredYearOption}
           expensesList={props.expensesList}
-          filterExpenseByYear={filterExpenseByYear}
         />
       </Card>
     </div>

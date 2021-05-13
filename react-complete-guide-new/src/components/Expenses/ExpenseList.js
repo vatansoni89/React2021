@@ -1,14 +1,18 @@
-import ExpenseItem from './ExpenseItem';
+import ExpenseItem from "./ExpenseItem";
 
 const ExpenseList = (props) => {
+const filteredList = props.expensesList.filter(x=>x.date.getFullYear() == props.filteredYearOption);
+console.log('props.filteredYearOption',props.filteredYearOption);
   return (
     <div>
       {props.filteredYearOption == "All Year" ? (
         props.expensesList.map((x) => <ExpenseItem item={x} key={x.id} />)
-      ) : props.filterExpenseByYear.length == 0 ? (
+      ) : filteredList.length == 0 ? (
         <p>No Expense</p>
       ) : (
-        props.filterExpenseByYear.map((x) => <ExpenseItem item={x} key={x.id} />)
+        filteredList.map((x) => (
+          <ExpenseItem item={x} key={x.id} />
+        ))
       )}
     </div>
   );
