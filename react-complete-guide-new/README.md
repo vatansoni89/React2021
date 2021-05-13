@@ -258,61 +258,68 @@ cd react-complete-guide-new
 npm install
 npm start
 ```
-# How React works #
-* public\index.html has index.html which have a div with id as root.
-* src\index.js render the App component on this root div.
-* All other component will be child to this App component.
 
-# Function component #
+# How React works
 
-* Create a component file under component folder.
-* Import necessary library.
-* Declare function variable by let and return jsx.
-* Export default variable.
+- public\index.html has index.html which have a div with id as root.
+- src\index.js render the App component on this root div.
+- All other component will be child to this App component.
+
+# Function component
+
+- Create a component file under component folder.
+- Import necessary library.
+- Declare function variable by let and return jsx.
+- Export default variable.
+
 ```javascript
-import './ExpenseItem.css'
+import "./ExpenseItem.css";
 
 let expenseItem = () => {
   return (
-    <div className='expense-item'>
+    <div className="expense-item">
       <div>March 28th 2021</div>
-      <div className='expense-item__description'>
-          <h2>Car Insurance</h2>
-          <div className='expense-item__price'>$294.67</div>
+      <div className="expense-item__description">
+        <h2>Car Insurance</h2>
+        <div className="expense-item__price">$294.67</div>
       </div>
     </div>
   );
 };
 
 export default expenseItem;
-
 ```
 
-# Composition by children props #
-* It is used when we have common stuff like style etc to apply on contained item.
-* Create Card.js and Card.css, here Card.js is a container returns div with common styles and given style(prop style).
-* Now <Card></Card> can be used as wrapper.
+# Composition by children props
+
+- It is used when we have common stuff like style etc to apply on contained item.
+- Create Card.js and Card.css, here Card.js is a container returns div with common styles and given style(prop style).
+- Now <Card></Card> can be used as wrapper.
 
 ### `Card.css`
+
 ```css
-.card{
-    border-radius: 12px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+.card {
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 ```
 
 ### `Card.js`
+
 ```javascript
 import "./Card.css";
 
 const card = (props) => {
-  let classes = 'card ' + props.className;
+  let classes = "card " + props.className;
   return <div className={classes}>{props.children}</div>;
 };
 
 export default card;
 ```
+
 ### `Expense.js`
+
 ```javascript
 import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
@@ -330,16 +337,21 @@ let expenses = (props) => {
 
 export default expenses;
 ```
-# Working with State #
-* Import useState from react.
-* use useState(value) to initialize state variable.
-* Destructure the return as it returns old value and a function to change old value.
-```javascript
-const[title, setTitle] = useState(props.item.title);
-``` 
-* Now use title to access get value and setTitle function to set value.
 
-# Events & State #
+# Working with State
+
+- Import useState from react.
+- use useState(value) to initialize state variable.
+- Destructure the return as it returns old value and a function to change old value.
+
+```javascript
+const [title, setTitle] = useState(props.item.title);
+```
+
+- Now use title to access get value and setTitle function to set value.
+
+# Events & State
+
 ```yaml
 App
   NewExpense
@@ -348,4 +360,85 @@ App
     ExpenseFilter: It has a local function which uses props function to set state.
     ExpenseItem
 ```
-  
+
+# Map function
+
+The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
+
+```javascript
+const array1 = [1, 4, 9, 16];
+
+// pass a function to map
+const map1 = array1.map((x) => x * 2);
+
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+```
+
+# Understanding "Keys"
+
+If we don't use key and add an item to list, then
+
+- It addes the item to last.
+- Rearrange list items and add the item to top.
+  > Degrades performance
+- So to solve this we add unique element as key, we don't need to do anything in component, just need to mention key as
+
+```javascript
+//No need to do anything inside ExpenseItem component.
+<Card className="expenses">
+  {props.expensesList.map((x) => (
+    <ExpenseItem item={x} key={x.id} />
+  ))}
+</Card>
+```
+
+# Filter function
+
+The filter() method creates a new array with all elements that pass the test implemented by the provided function.
+
+```javascript
+const words = [
+  "spray",
+  "limit",
+  "elite",
+  "exuberant",
+  "destruction",
+  "present",
+];
+
+const result = words.filter((word) => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+```
+# How re-render works #
+Whatever is connected to state variable will re-render if the state variable changes/updated.
+```javascript
+let Expenses = (props) => {
+  const [filteredYearOption, setFilterOptions] = useState("All Year");
+
+  const filtereChangeHandler = (exp) => {
+    setFilterOptions(exp);
+  };
+
+ const filterExpenseByYear = props.expensesList.filter(x=>x.date.getFullYear() == filteredYearOption);
+
+  return (
+    <div>
+      <Card className="expenses">
+        <ExpenseFilter
+          onYearSelection={filtereChangeHandler}
+          defaultYear={filteredYearOption}
+        />
+        { filteredYearOption == 'All Year' ? props.expensesList.map((x) => (
+          <ExpenseItem item={x}  key={x.id} />)) :
+        (filterExpenseByYear.length == 0 ? <p>No Expense</p> : filterExpenseByYear.map((x) => (
+          <ExpenseItem item={x}  key={x.id} />)
+        ))}
+      </Card>
+    </div>
+  );
+};
+```
+> Here filteredYearOption is connected to list and drop down both so both will re-render.
