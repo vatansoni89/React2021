@@ -3,6 +3,7 @@ import "./Expenses.css";
 import Card from "../UI/Card";
 import ExpenseFilter from "./ExpenseFilter";
 import { useState } from "react";
+import ExpenseList from "./ExpenseList";
 
 let Expenses = (props) => {
   const [filteredYearOption, setFilterOptions] = useState("All Year");
@@ -15,15 +16,6 @@ let Expenses = (props) => {
     (x) => x.date.getFullYear() == filteredYearOption
   );
 
-  let xxx = //If 'all year' then show full list else if filtered list lenth is 0 then show msz or show filtered list.
-    filteredYearOption == "All Year" ? (
-      props.expensesList.map((x) => <ExpenseItem item={x} key={x.id} />)
-    ) : filterExpenseByYear.length == 0 ? (
-      <p>No Expense</p>
-    ) : (
-      filterExpenseByYear.map((x) => <ExpenseItem item={x} key={x.id} />)
-    );
-
   return (
     <div>
       <Card className="expenses">
@@ -31,7 +23,12 @@ let Expenses = (props) => {
           onYearSelection={filtereChangeHandler}
           defaultYear={filteredYearOption}
         />
-        {xxx}
+
+        <ExpenseList
+          filteredYearOption={filteredYearOption}
+          expensesList={props.expensesList}
+          filterExpenseByYear={filterExpenseByYear}
+        />
       </Card>
     </div>
   );
