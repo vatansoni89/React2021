@@ -21,24 +21,27 @@ const expenses = [
     title: "New Desk (Wooden)",
     amount: 450,
     date: new Date(2021, 5, 12),
-  }
+  },
 ];
 
 const App = () => {
   const [updatedExpenses, setExpenses] = useState(expenses);
 
   const newExpenseSubmitHandler = (newExpense) => {
-    console.log('newExpense from App.js',newExpense);
-    setExpenses(prevExpense => {
-      return [newExpense, ...prevExpense]
+    console.log("newExpense from App.js", newExpense);
+    setExpenses((prevExpense) => {
+      return [newExpense, ...prevExpense];
     });
-
   };
+
 
   return (
     <div>
       <h2>Lets get started</h2>
-      {console.log('App return>>>',<NewExpense onSubmit={newExpenseSubmitHandler} />)}
+      {console.log(
+        "App return>>>",
+        <NewExpense onSubmit={newExpenseSubmitHandler} />
+      )}
       <NewExpense onSubmit={newExpenseSubmitHandler} />
       <Expenses expensesList={updatedExpenses}></Expenses>
     </div>
