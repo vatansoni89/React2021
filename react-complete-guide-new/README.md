@@ -442,3 +442,26 @@ let Expenses = (props) => {
 };
 ```
 > Here filteredYearOption is connected to list and drop down both so both will re-render.
+
+# Style takes object in react #
+Here we see `style={{ height: barFillHeight }}` because style takes a js object and inside that we pass calculated barFillHeight.
+```javascript
+const ChartBar = (props) => {
+  let barFillHeight = "0%";
+
+  if (props.maxValue > 0) {
+    barFillHeight = Math.round((props.value / props.maxValue) * 100) + "%";
+  }
+  return (
+    <div className="chart-bar">
+      <div className="chart-bar__inner">
+        <div
+          className="chart-bar__fill"
+          style={{ height: barFillHeight }}
+        ></div>
+      </div>
+      <div className="chart-bar__label">{props.label}</div>
+    </div>
+  );
+};
+```
