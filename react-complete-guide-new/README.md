@@ -358,7 +358,12 @@ App
     ExpenseForm
   Expenses: Pass a props function to set the state and default val of dropdwn.
     ExpenseFilter: It has a local function which uses props function to set state.
-    ExpenseItem
+    ExpensesChart
+      Chart
+        ChartBar
+    ExpenseList
+      ExpenseItem
+        ExpenseDate
 ```
 
 # Map function
@@ -412,8 +417,11 @@ const result = words.filter((word) => word.length > 6);
 console.log(result);
 // expected output: Array ["exuberant", "destruction", "present"]
 ```
-# How re-render works #
+
+# How re-render works
+
 Whatever is connected to state variable will re-render if the state variable changes/updated.
+
 ```javascript
 let Expenses = (props) => {
   const [filteredYearOption, setFilterOptions] = useState("All Year");
@@ -422,7 +430,9 @@ let Expenses = (props) => {
     setFilterOptions(exp);
   };
 
- const filterExpenseByYear = props.expensesList.filter(x=>x.date.getFullYear() == filteredYearOption);
+  const filterExpenseByYear = props.expensesList.filter(
+    (x) => x.date.getFullYear() == filteredYearOption
+  );
 
   return (
     <div>
@@ -431,20 +441,24 @@ let Expenses = (props) => {
           onYearSelection={filtereChangeHandler}
           defaultYear={filteredYearOption}
         />
-        { filteredYearOption == 'All Year' ? props.expensesList.map((x) => (
-          <ExpenseItem item={x}  key={x.id} />)) :
-        (filterExpenseByYear.length == 0 ? <p>No Expense</p> : filterExpenseByYear.map((x) => (
-          <ExpenseItem item={x}  key={x.id} />)
-        ))}
+        {filteredYearOption == "All Year" ? (
+          props.expensesList.map((x) => <ExpenseItem item={x} key={x.id} />)
+        ) : filterExpenseByYear.length == 0 ? (
+          <p>No Expense</p>
+        ) : (
+          filterExpenseByYear.map((x) => <ExpenseItem item={x} key={x.id} />)
+        )}
       </Card>
     </div>
   );
 };
 ```
+
 > Here filteredYearOption is connected to list and drop down both so both will re-render.
 
-# Style takes object in react #
+# Style takes object in react
 Here we see `style={{ height: barFillHeight }}` because style takes a js object and inside that we pass calculated barFillHeight.
+
 ```javascript
 const ChartBar = (props) => {
   let barFillHeight = "0%";
