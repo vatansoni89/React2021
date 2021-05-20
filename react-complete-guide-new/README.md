@@ -457,6 +457,7 @@ let Expenses = (props) => {
 > Here filteredYearOption is connected to list and drop down both so both will re-render.
 
 # Style takes object in react
+
 Here we see `style={{ height: barFillHeight }}` because style takes a js object and inside that we pass calculated barFillHeight.
 
 ```javascript
@@ -479,8 +480,11 @@ const ChartBar = (props) => {
   );
 };
 ```
+
 # unshift()
+
 The unshift() method adds one or more elements to the beginning of an array and returns the new length of the array.
+
 ```javascript
 const array1 = [1, 2, 3];
 
@@ -490,3 +494,44 @@ console.log(array1.unshift(4, 5));
 console.log(array1);
 // expected output: Array [4, 5, 1, 2, 3]
 ```
+
+# Styling React Component
+
+- Inline style: Accept js object.
+  ```javascript
+  <div className="form-control">
+        <label style={{ color: isValid ? "black" : "red" }}>
+          {isValid ? "Course Goal" : "Enter Something"}
+        </label>
+  ```
+- CSS modules
+
+  1. Rename example.css to example.module.css
+  2. Import with name
+
+  ```javascript
+  import styles from "./CourseInput.module.css";
+  ```
+
+  3. using name as js object and access style example
+
+  ```javascript
+  const Button = (props) => {
+    return (
+      <button
+        type={props.type}
+        className={styles.button}
+        onClick={props.onClick}
+      >
+        {props.children}
+      </button>
+    );
+  };
+  ```
+  Or
+  ```javascript
+  <div className={`${styles["form-control"]} ${!isValid && styles.  invalid}`}>
+  ```
+* `Media query`:
+  Define this in css module and use (example Button.module.css)
+
