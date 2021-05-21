@@ -535,3 +535,11 @@ console.log(array1);
 * `Media query`:
   Define this in css module and use (example Button.module.css)
 
+# Overlay
+backdrop
+
+# html
+ul li
+type of input
+header-div-footer
+dynamic header and body
