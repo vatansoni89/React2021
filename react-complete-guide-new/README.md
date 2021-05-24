@@ -528,18 +528,47 @@ console.log(array1);
     );
   };
   ```
+
   Or
+
   ```javascript
   <div className={`${styles["form-control"]} ${!isValid && styles.  invalid}`}>
   ```
+
 * `Media query`:
   Define this in css module and use (example Button.module.css)
 
 # Overlay
+
 backdrop
 
 # html
+
 ul li
 type of input
 header-div-footer
 dynamic header and body
+
+# Fragments, Portals & Refs
+
+* Fragments : It is used to simplify Div soup issue. Div is is nested divs because we need to return a single jsx node component. Use `<React.Fragment>` instead of `<div>`.
+
+```javascript
+<React.Fragment></React.Fragment>
+```
+* Portals : It is used to render a component at specific dom html id. for example if we want to render any coponent side by side to root component then
+`Steps`:
+1. Define ids in root index.html.
+    ```html
+    <div id="root-backdrop"></div>
+    <div id="root-overlay"></div>
+    <div id="root"></div>
+    ```
+2. import ReactDOM and use createPortal(customComponent, id) 
+    ```javascript
+    return (
+    <React.Fragment>
+      {ReactDOM.createPortal(<Overlay message={props.message} title={props.title}/>, document.getElementById('root-overlay'))}
+    </React.Fragment>
+    );
+    ```

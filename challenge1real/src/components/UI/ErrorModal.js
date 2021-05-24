@@ -1,16 +1,20 @@
 import styles from "./ErrorModal.module.css";
 import Card from "./Card";
 import Button from "./Button";
+import React from "react";
+import ReactDOM from "react-dom";
 
 const ErrorModal = (props) => {
-
-    const onClickHandler = () =>{
+  const onClickHandler = () => {
     props.checkValidUser();
-    };
+  };
 
-  return (
-    <div>
-      <div className={styles.backdrop} onClick={onClickHandler}/>
+  const Backdrop = (props) => {
+    return <div className={styles.backdrop} onClick={props.onClickHandler} />;
+  };
+
+  const Overlay = (props) => {
+    return (
       <Card className={styles.modal}>
         <header className={styles.header}>
           <h2>{props.title}</h2>
@@ -20,7 +24,14 @@ const ErrorModal = (props) => {
           <Button onClick={onClickHandler}>Okay</Button>
         </footer>
       </Card>
-    </div>
+    );
+  };
+
+  return (
+    <React.Fragment>
+      {ReactDOM.createPortal(<Backdrop onClickHandler={onClickHandler} />, document.getElementById('root-backdrop'))}
+      {ReactDOM.createPortal(<Overlay message={props.message} title={props.title}/>, document.getElementById('root-overlay'))}
+    </React.Fragment>
   );
 };
 
