@@ -564,7 +564,7 @@ dynamic header and body
     <div id="root-overlay"></div>
     <div id="root"></div>
     ```
-2. import ReactDOM and use createPortal(customComponent, id) 
+2. Import ReactDOM and use createPortal(customComponent, id) 
     ```javascript
     return (
     <React.Fragment>
@@ -572,3 +572,8 @@ dynamic header and body
     </React.Fragment>
     );
     ```
+* Refs: it allow us to dom elements. It is used to read input fields. we are using state (useState) but we can use Refs also. we use useRefs(). we need to `import {useRef} from 'react';`
+
+# Effects, Reducers and Context
+
+* useEffect: `useEffect(()=>{},[dependencies])`
