@@ -576,4 +576,52 @@ dynamic header and body
 
 # Effects, Reducers and Context
 
-* useEffect: `useEffect(()=>{},[dependencies])`
+* `useEffect` : `useEffect(()=>{},[dependencies])` \
+To decide whether a code section will execute on specific state change (dependency) or not.
+
+  When state change then the component function re-execute, now if we want that a code section need to run only if specific state is changed then we use useeffect.
+
+  It runs at last (after executing JSX), and if the state again gets chaged in useEffect then jsx execute again.
+
+  > Here `setFormIsValid()` was being duplicated, and we can reduce it by using useState, Now whenever `enteredEmail or enteredPassword` `state` changes then only useEffect executes and validate.
+  ```javascript
+  const Login = (props) => {
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [emailIsValid, setEmailIsValid] = useState();
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [passwordIsValid, setPasswordIsValid] = useState();
+  const [formIsValid, setFormIsValid] = useState(false);
+
+  useEffect(() => {
+    setFormIsValid(
+      enteredEmail.includes("@") && enteredPassword.trim().length > 6
+    );
+  }, [enteredEmail, enteredPassword]);
+
+  const emailChangeHandler = (event) => {
+    setEnteredEmail(event.target.value);
+
+    // setFormIsValid(
+    //   event.target.value.includes('@') && enteredPassword.trim().length > 6
+    // );
+  };
+
+  const passwordChangeHandler = (event) => {
+    setEnteredPassword(event.target.value);
+
+    // setFormIsValid(
+    //   event.target.value.trim().length > 6 && enteredEmail.includes('@')
+    // );
+  };
+  ```
+
+* `localStorage` : The localStorage and sessionStorage properties allow to save key/value pairs in a web browser.
+
+  The localStorage object stores data with no expiration date. The data will not be deleted when the browser is closed, and will be available the next day, week, or year.
+  The localStorage property is read-only.
+
+  `Functions`:
+  1. localStorage.setItem('userLogin' , '1');
+  2. localStorage.getItem('userLogin');
+  3. localStorage.removeItem('userLogin');
+
