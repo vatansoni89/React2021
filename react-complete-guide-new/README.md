@@ -614,6 +614,26 @@ To decide whether a code section will execute on specific state change (dependen
     // );
   };
   ```
+  `UseEffect` can return a cleanup function also which will execute `before` the next UseEffect execution.  
+
+  ```javascript
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("from useEffect L15");
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      );
+    }, 500);
+
+    return () => {
+      console.log("from useEffect clean");
+      clearTimeout(identifier);
+    };
+  }, [enteredEmail, enteredPassword]);
+  ```
+  > when page loads setTimeOut executes after 2 sec but for next exection it first executes clean-up function.
+
+  So here the timer is being created on every key type for mail and password, but next key type is deleting the previous timer by `clearTimeout`, once user stops for 500 msec then only function inside setTimeout is executing.
 
 * `localStorage` : The localStorage and sessionStorage properties allow to save key/value pairs in a web browser.
 
