@@ -678,8 +678,4 @@ export default MyReducer;
 
 ```
 
-<img src="../master/react-complete-guide-new/Reducerconcept.jpg" alt="Reducer Concept"/>
-
-<!-- ![Kitten](Images/Capture.jpg "A cute kitten") -->
-
-<!-- <img src="Images/Reducerconcept.jpg" alt="Reducer Concept" style="height: 90px; width:130px;"/> -->
+<img src="Images/Reducerconcept.jpg" alt="Reducer Concept"/>
