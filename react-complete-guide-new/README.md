@@ -645,3 +645,41 @@ To decide whether a code section will execute on specific state change (dependen
   2. localStorage.getItem('userLogin');
   3. localStorage.removeItem('userLogin');
 
+# Reducers
+
+It extension of useState. In usestate we get a ststeful variable and a function to set that variable. Here we get a function to set the state of stateful variable. 
+
+```javascript
+const [counter, setCounter] = useReducer(fun1 /*Execute on setCounter call and have previous state and action object passed by setCounter({object})*/,1 /*default value for stateful variale 'counter'*/);
+```
+Easy example:
+
+```javascript
+import { useReducer } from "react";
+
+const fun1 = (prevState, action) => {
+    console.log('prevState >> ',prevState);
+    console.log('action >> ',action);
+return prevState+1;
+};   
+
+const MyReducer = (props) => {
+const [counter, setCounter] = useReducer(fun1,1);
+const counterClickHandler = () =>{
+    setCounter({name: 'vatan', value: 1000});
+};
+
+  return <div>
+      <button onClick={counterClickHandler} style={{float: 'right'}}>Clicked times: {counter}</button>
+  </div>;
+};
+
+export default MyReducer;
+
+```
+
+<img src="Images/Reducerconcept.jpg" alt="Reducer Concept"/>
+
+<!-- ![Kitten](Images/Capture.jpg "A cute kitten") -->
+
+<!-- <img src="Images/Reducerconcept.jpg" alt="Reducer Concept" style="height: 90px; width:130px;"/> -->
