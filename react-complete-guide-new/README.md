@@ -650,10 +650,13 @@ To decide whether a code section will execute on specific state change (dependen
 It extension of useState. In usestate we get a ststeful variable and a function to set that variable. Here we get a function to set the state of stateful variable. 
 
 ```javascript
-const [counter, setCounter] = useReducer(fun1 /*Execute on setCounter call and have previous state and action object passed by setCounter({object})*/,1 /*default value for stateful variale 'counter'*/);
+const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn);
+```
+Easy example explaination:
+```javascript
+const [counter, setCounter] = useReducer(fun1 /*Execute on setCounter call and have previous state and action object passed by setCounter({object}) and it must return new updated state*/,1 /*default value for stateful variale 'counter'*/);
 ```
 Easy example:
-
 ```javascript
 import { useReducer } from "react";
 
@@ -665,6 +668,7 @@ return prevState+1;
 
 const MyReducer = (props) => {
 const [counter, setCounter] = useReducer(fun1,1);
+
 const counterClickHandler = () =>{
     setCounter({name: 'vatan', value: 1000});
 };
