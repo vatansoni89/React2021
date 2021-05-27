@@ -678,7 +678,7 @@ export default MyReducer;
 
 ```
 
-<img src="Images/Reducerconcept.jpg" alt="Reducer Concept"/>
+<img src="/Images/Reducerconcept.jpg" alt="Reducer Concept"/>
 
 <!-- ![Kitten](Images/Capture.jpg "A cute kitten") -->
 
