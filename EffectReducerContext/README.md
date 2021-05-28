@@ -551,39 +551,47 @@ dynamic header and body
 
 # Fragments, Portals & Refs
 
-* Fragments : It is used to simplify Div soup issue. Div is is nested divs because we need to return a single jsx node component. Use `<React.Fragment>` instead of `<div>`.
+- Fragments : It is used to simplify Div soup issue. Div is is nested divs because we need to return a single jsx node component. Use `<React.Fragment>` instead of `<div>`.
 
 ```javascript
 <React.Fragment></React.Fragment>
 ```
-* Portals : It is used to render a component at specific dom html id. for example if we want to render any coponent side by side to root component then
-`Steps`:
+
+- Portals : It is used to render a component at specific dom html id. for example if we want to render any coponent side by side to root component then
+  `Steps`:
+
 1. Define ids in root index.html.
-    ```html
-    <div id="root-backdrop"></div>
-    <div id="root-overlay"></div>
-    <div id="root"></div>
-    ```
-2. Import ReactDOM and use createPortal(customComponent, id) 
-    ```javascript
-    return (
-    <React.Fragment>
-      {ReactDOM.createPortal(<Overlay message={props.message} title={props.title}/>, document.getElementById('root-overlay'))}
-    </React.Fragment>
-    );
-    ```
-* Refs: it allow us to dom elements. It is used to read input fields. we are using state (useState) but we can use Refs also. we use useRefs(). we need to `import {useRef} from 'react';`
+   ```html
+   <div id="root-backdrop"></div>
+   <div id="root-overlay"></div>
+   <div id="root"></div>
+   ```
+2. Import ReactDOM and use createPortal(customComponent, id)
+   ```javascript
+   return (
+     <React.Fragment>
+       {ReactDOM.createPortal(
+         <Overlay message={props.message} title={props.title} />,
+         document.getElementById("root-overlay")
+       )}
+     </React.Fragment>
+   );
+   ```
+
+- Refs: it allow us to dom elements. It is used to read input fields. we are using state (useState) but we can use Refs also. we use useRefs(). we need to `import {useRef} from 'react';`
 
 # Effects, Reducers and Context
 
-* # `useEffect` : `useEffect(()=>{},[dependencies])`
-To decide whether a code section will execute on specific state change (dependency) or not.
+- # `useEffect` : `useEffect(()=>{},[dependencies])`
+
+  To decide whether a code section will execute on specific state change (dependency) or not.
 
   When state change then the component function re-execute, now if we want that a code section need to run only if specific state is changed then we use useeffect.
 
   It runs at last (after executing JSX), and if the state again gets chaged in useEffect then jsx execute again.
 
   > Here `setFormIsValid()` was being duplicated, and we can reduce it by using useState, Now whenever `enteredEmail or enteredPassword` `state` changes then only useEffect executes and validate.
+
   ```javascript
   const Login = (props) => {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -614,7 +622,8 @@ To decide whether a code section will execute on specific state change (dependen
     // );
   };
   ```
-  `UseEffect` can return a cleanup function also which will execute `before` the next UseEffect execution.  
+
+  `UseEffect` can return a cleanup function also which will execute `before` the next UseEffect execution.
 
   ```javascript
   useEffect(() => {
@@ -631,60 +640,139 @@ To decide whether a code section will execute on specific state change (dependen
     };
   }, [enteredEmail, enteredPassword]);
   ```
+
   > when page loads setTimeOut executes after 2 sec but for next exection it first executes clean-up function.
 
   So here the timer is being created on every key type for mail and password, but next key type is deleting the previous timer by `clearTimeout`, once user stops for 500 msec then only function inside setTimeout is executing.
 
-* `localStorage` : The localStorage and sessionStorage properties allow to save key/value pairs in a web browser.
+- `localStorage` : The localStorage and sessionStorage properties allow to save key/value pairs in a web browser.
 
   The localStorage object stores data with no expiration date. The data will not be deleted when the browser is closed, and will be available the next day, week, or year.
   The localStorage property is read-only.
 
   `Functions`:
+
   1. localStorage.setItem('userLogin' , '1');
   2. localStorage.getItem('userLogin');
   3. localStorage.removeItem('userLogin');
 
-* # Reducers
+- # Reducers
 
-  It's extension of useState. In usestate we get a ststeful   variable and a function to set that variable. Here we get a   function to set the state of stateful variable. 
-  
+  It's extension of useState. In usestate we get a ststeful variable and a function to set that variable. Here we get a function to set the state of stateful variable.
+
   ```javascript
-  const [state, dispatchFn] = useReducer(reducerFn, initialState,   initFn);
+  const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn);
   ```
+
   Easy example explaination:
+
   ```javascript
-  const [counter, setCounter] = useReducer(fun1 /*Execute on   setCounter call and have previous state and action object   passed by setCounter({object}) and it must return new updated   state*/,1 /*default value for stateful variale 'counter'*/);
+  const [counter, setCounter] = useReducer(
+    fun1 /*Execute on   setCounter call and have previous state and action object   passed by setCounter({object}) and it must return new updated   state*/,
+    1 /*default value for stateful variale 'counter'*/
+  );
   ```
+
   Easy example:
+
   ```javascript
   import { useReducer } from "react";
-  
+
   const fun1 = (prevState, action) => {
-      console.log('prevState >> ',prevState);
-      console.log('action >> ',action);
-  return prevState+1;
-  };   
-  
+    console.log("prevState >> ", prevState);
+    console.log("action >> ", action);
+    return prevState + 1;
+  };
+
   const MyReducer = (props) => {
-  const [counter, setCounter] = useReducer(fun1,1);
-  
-  const counterClickHandler = () =>{
-      setCounter({name: 'vatan', value: 1000});
+    const [counter, setCounter] = useReducer(fun1, 1);
+
+    const counterClickHandler = () => {
+      setCounter({ name: "vatan", value: 1000 });
+    };
+
+    return (
+      <div>
+        <button onClick={counterClickHandler} style={{ float: "right" }}>
+          Clicked times: {counter}
+        </button>
+      </div>
+    );
   };
-  
-    return <div>
-        <button onClick={counterClickHandler} style={{float:   'right'}}>Clicked times: {counter}</button>
-    </div>;
-  };
-  
+
   export default MyReducer;
-  
   ```
+
   <img src="Images/Reducerconcept.jpg" alt="Reducer Concept"/>
 
-* # useContext
+- # useContext
+
   React’s useContext hook makes it easy to pass data throughout your app without manually passing props down the tree.
+  Main actors: React.createContext(), useContext(SampleContext)
 
-  
+  Steps:
 
+  1. Create context component and export by using `React.createContext()`. We can do this with no value also. The values here are only to support auto-complete.
+
+  ```javascript
+  import React from "react";
+
+  const AuthContext = React.createContext({
+    isLoggedIn: false,
+    onLogout: () => {}, //help autocomplition.
+  });
+
+  export default AuthContext;
+  ```
+
+  2. Wrap the component where you want to use this context as
+
+  ```javascript
+  return (
+    <AuthContext.Provider
+      value={{ isLoggedIn: isLoggedIn, onLogout: logoutHandler }}
+    >
+      <MainHeader />
+      <main>
+        <MyReducer />
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
+    </AuthContext.Provider>
+  );
+  ```
+
+  3. Now we can use context anywhere down the tree by `importing useContext` and using context variable by using `useContext(AuthContext)`.
+
+  ```javascript
+  import React, { useContext } from "react";
+  import classes from "./Navigation.module.css";
+  import AuthContext from "../../store/auth-context";
+  const Navigation = () => {
+    const ctx = useContext(AuthContext);
+
+    return (
+      <nav className={classes.nav}>
+        <ul>
+          {ctx.isLoggedIn && (
+            <li>
+              <a href="/">Users</a>
+            </li>
+          )}
+          {ctx.isLoggedIn && (
+            <li>
+              <a href="/">Admin</a>
+            </li>
+          )}
+          {ctx.isLoggedIn && (
+            <li>
+              <button onClick={ctx.onLogout}>Logout</button>
+            </li>
+          )}
+        </ul>
+      </nav>
+    );
+  };
+
+  export default Navigation;
+  ```
