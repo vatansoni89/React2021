@@ -135,11 +135,7 @@ Rest Operator
 
 const fun1 = (...arg) => arg.sort();
 
-console.log(fun1);
-
-
-
-fun1(5,4,3)
+console.log(fun1(5,4,3));
 
 OP:
 
