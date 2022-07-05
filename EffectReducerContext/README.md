@@ -234,6 +234,30 @@ const secondPerson = person;
 person.name = "Name changed";
 
 console.log(secondPerson);
+
+//<<<<<<<<<<Copy reference type as value type>>>>>>>
+const person = {
+  name: "Vatan",
+  surname: "Soni"
+};
+
+const secondPerson = {...person};
+
+person.name = "Sonu";
+
+console.log(secondPerson);
+console.log(person);
+
+OP:
+[object Object] {
+  name: "Vatan",
+  surname: "Soni"
+}
+[object Object] {
+  name: "Sonu",
+  surname: "Soni"
+}
+
 ```
 
 # Refreshing Array Functions
